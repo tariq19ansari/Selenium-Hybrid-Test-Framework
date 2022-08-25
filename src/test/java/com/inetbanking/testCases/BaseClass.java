@@ -2,6 +2,8 @@
 
 package com.inetbanking.testCases;
 
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -14,13 +16,16 @@ public class BaseClass {
 	public String password = "tunyhyn";
 	public static WebDriver driver;       // WebDriver object is initiated
 	
-	
+	public static Logger logger;
+
 	@BeforeClass
 	public void setup()
 	{
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"//Drivers//chromedriver.exe");
 		driver = new ChromeDriver();      // Instantiation of Chrome Driver
 		
+		logger = Logger.getLogger("ebanking");
+		PropertyConfigurator.configure("resource/log4j.properties");
 	}
 
 	@AfterClass
