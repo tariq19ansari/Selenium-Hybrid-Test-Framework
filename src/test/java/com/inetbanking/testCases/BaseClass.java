@@ -11,11 +11,15 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 
+import com.inetbanking.utilities.ReadConfig;
+
 public class BaseClass {
 	
-	public String baseUrl = "https://demo.guru99.com/v4/";
-	public String username = "mngr431339";
-	public String password = "tunyhyn";
+	ReadConfig readConfig = new ReadConfig();
+	
+	public String baseUrl = readConfig.getApplicationURL();
+	public String username = readConfig.getUsername();
+	public String password = readConfig.getPassword();
 	public static WebDriver driver;       						// WebDriver object is initiated
 	
 	public static Logger logger;
@@ -23,7 +27,7 @@ public class BaseClass {
 	@BeforeClass
 	public void setup()
 	{
-		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir")+"//Drivers//chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", readConfig.getChromePath());
 		driver = new ChromeDriver();     						 // Instantiation of Chrome Driver
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
